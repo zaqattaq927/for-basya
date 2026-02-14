@@ -182,27 +182,40 @@
         puzzleDiv.style.display = "none";
         proposalDiv.style.display = "none";
 
-        // Create and fade in the message
-        const message = document.createElement("div");
-        message.id = "finalMessage";
-        message.style.fontSize = "2em";
-        message.style.marginTop = "50px";
-        message.style.opacity = 0;
-        message.style.transition = "opacity 2s";
-        message.innerHTML = `
-            YAY!!! 💖<br>
-            I can't wait to celebrate with you.<br>
-            I love you, Basya! 💘
-        `;
-        document.body.appendChild(message);
+        // Create container for final message and image
+        const finalContainer = document.createElement("div");
+        finalContainer.id = "finalMessage";
+        finalContainer.style.textAlign = "center";
+        finalContainer.style.marginTop = "50px";
+        finalContainer.style.opacity = 0;
+        finalContainer.style.transition = "opacity 2s";
 
-        // Trigger fade-in
+        // Add message first, image below
+        finalContainer.innerHTML = `
+            <div style="font-size: 2em; color: #fff; font-family: 'Georgia', serif; margin-bottom: 20px;">
+                YAY!!! 💖<br>
+                You will always be my pwintheth.<br>
+                I love you, Basya! 💘
+            </div>
+            <img id="finalImage" src="final.jpg" alt="Our special moment" style="max-width: 300px; border-radius: 20px; transform: scale(0.8); transition: transform 1.5s;">
+        `;
+
+        document.body.appendChild(finalContainer);
+
+        // Fade in container
         setTimeout(() => {
-            message.style.opacity = 1;
+            finalContainer.style.opacity = 1;
+
+            // Animate image scale
+            const img = document.getElementById("finalImage");
+            setTimeout(() => {
+                img.style.transform = "scale(1)";
+            }, 200);
         }, 50);
 
     }, 1000); // Wait for fade-out
 }
+
 
 
     function moveNo(button) {
