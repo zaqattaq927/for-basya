@@ -166,11 +166,44 @@
     }
 
     function sayYes() {
-        startConfetti();
+    startConfetti();
+
+    // Fade out puzzle and proposal
+    const puzzleDiv = document.getElementById("puzzle");
+    const proposalDiv = document.getElementById("proposal");
+    
+    puzzleDiv.style.transition = "opacity 1s";
+    proposalDiv.style.transition = "opacity 1s";
+    
+    puzzleDiv.style.opacity = 0;
+    proposalDiv.style.opacity = 0;
+
+    setTimeout(() => {
+        puzzleDiv.style.display = "none";
+        proposalDiv.style.display = "none";
+
+        // Create and fade in the message
+        const message = document.createElement("div");
+        message.id = "finalMessage";
+        message.style.fontSize = "2em";
+        message.style.marginTop = "50px";
+        message.style.opacity = 0;
+        message.style.transition = "opacity 2s";
+        message.innerHTML = `
+            YAY!!! 💖<br>
+            I can't wait to celebrate with you.<br>
+            I love you, Basya! 💘
+        `;
+        document.body.appendChild(message);
+
+        // Trigger fade-in
         setTimeout(() => {
-            alert("YAY!!! 💖 I can't wait to celebrate with you. I love you Basya! 💘");
-        }, 300);
-    }
+            message.style.opacity = 1;
+        }, 50);
+
+    }, 1000); // Wait for fade-out
+}
+
 
     function moveNo(button) {
         button.style.position = "absolute";
