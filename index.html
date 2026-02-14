@@ -136,13 +136,28 @@
         }
     }
 
-    function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        emptyIndex = tiles.indexOf(8);
+   function shuffle(array) {
+    // Start with the solved puzzle
+    array = [...Array(9).keys()];
+
+    // Make 1000 random valid moves from the solved state
+    let empty = 8; // empty tile index
+    for (let i = 0; i < 1000; i++) {
+        const moves = [];
+        if (empty % 3 !== 0) moves.push(empty - 1); // left
+        if (empty % 3 !== 2) moves.push(empty + 1); // right
+        if (empty > 2) moves.push(empty - 3);       // up
+        if (empty < 6) moves.push(empty + 3);       // down
+
+        const move = moves[Math.floor(Math.random() * moves.length)];
+        [array[move], array[empty]] = [array[empty], array[move]];
+        empty = move;
     }
+
+    tiles = array;
+    emptyIndex = tiles.indexOf(8);
+}
+
 
     function checkWin() {
         if (tiles.every((val, i) => val === i)) {
